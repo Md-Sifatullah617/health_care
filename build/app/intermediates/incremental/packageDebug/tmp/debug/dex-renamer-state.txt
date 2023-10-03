@@ -1,4 +1,4 @@
-#Tue Oct 03 08:53:17 BDT 2023
-base.0=/Volumes/Personal Space/Head sir project/Doctor/health care/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Tue Oct 03 08:58:46 BDT 2023
+base.0=/Volumes/Personal Space/Head sir project/Doctor/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
