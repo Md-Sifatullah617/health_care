@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:patient_health_care/home/Home.dart';
+import 'package:patient_health_care/screens/diabetes.dart';
+import 'package:patient_health_care/screens/question_answer/ask_question.dart';
 
 import '../../registration/log_in.dart';
 
-class dr extends StatefulWidget {
-   dr({super.key});
+class all_drower extends StatefulWidget {
+  all_drower({super.key});
 
   @override
-  State<dr> createState() => _drState();
+  State<all_drower> createState() => _drState();
 }
 
-class _drState extends State<dr> {
+class _drState extends State<all_drower> {
   final Box _boxLogin = Hive.box("login");
 
   @override
@@ -43,7 +45,7 @@ class _drState extends State<dr> {
           ),
 
           ListTile(
-            leading: const Icon(Icons.logout),
+            leading: const Icon(Icons.dashboard),
             title: const Text('ড্যাশবোর্ড'),
             onTap: () {
               // Implement All Appoinment
@@ -68,7 +70,11 @@ class _drState extends State<dr> {
                 title: const Text('প্রয়োজনীয় তথ্য'),
                 onTap: () {
                   // Implement Necessary Information
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const diabates_info();
+                    },
+                  ));
                 },
               ),
             ],
@@ -78,14 +84,29 @@ class _drState extends State<dr> {
             title: const Text('প্রশ্নোত্তর'),
             children: <Widget>[
               ListTile(
-                title: const Text('পেন্ডিং প্রশ্নোত্তর'),
+                title: const Text('প্রশ্ন করুন'),
                 onTap: () {
-                  // Implement Pending Question/Answer
-                  Navigator.pop(context);
+
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const askQuestion();
+                    },
+                  ));
                 },
               ),
               ListTile(
-                title: const Text('সকল প্রশ্নোত্তর'),
+                title: const Text('পেইনডিং প্রশ্ন'),
+                onTap: () {
+
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return const askQuestion();
+                    },
+                  ));
+                },
+              ),
+              ListTile(
+                title: const Text('সকল উত্তর'),
                 onTap: () {
                   // Implement All Question/Answer
                   Navigator.pop(context);
@@ -97,6 +118,13 @@ class _drState extends State<dr> {
             leading: const Icon(Icons.note_alt_outlined),
             title: const Text('এপোয়েনমেন্ট'),
             children: <Widget>[
+              ListTile(
+                title: const Text('নতুন অ্যাপয়েন্টমেন্ট'),
+                onTap: () {
+                  // Implement Pending Appoinment
+                  Navigator.pop(context);
+                },
+              ),
               ListTile(
                 title: const Text('পেন্ডিং এপোয়েনমেন্ট'),
                 onTap: () {
