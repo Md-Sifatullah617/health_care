@@ -28,16 +28,18 @@ class home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Welcome ",
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              _boxLogin.get("userName"),
-              style: Theme.of(context).textTheme.headlineLarge,
-
-            ),
+            // Text(
+            //   "Welcome ",
+            //   style: Theme.of(context).textTheme.bodyLarge,
+            // ),
+            // const SizedBox(height: 10),
+            // Text(
+            //   _boxLogin.get("userName"),
+            //   style: Theme.of(context).textTheme.headlineLarge,
+            //
+            // ),
+           const SizedBox(height: 20,),
+            Text("update"),
           ],
         ),
       ),
