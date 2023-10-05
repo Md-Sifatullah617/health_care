@@ -66,30 +66,51 @@ class _askQuestionState extends State<askQuestion> {
               Text("আপনার প্রশ্নটি লিখুন",
                 style: Theme.of(context).textTheme.bodyMedium,),
               // question adding
+
+
               const SizedBox(height: 10,),
 
-              TextFormField(
-                controller: _controllerQuestions,
-                keyboardType: TextInputType.name,
-                decoration: InputDecoration(
-                  labelText: "Question",
-                  prefixIcon: const Icon(Icons.question_answer),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+              ConstrainedBox(
 
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return "আপনার প্রশ্ন টি লিখুন";
-                  }
+                  constraints: BoxConstraints(maxHeight: 9* 20.0),
+                      child: TextFormField(
 
-                  return null;
-                },
+                        controller: _controllerQuestions,
+                        keyboardType: TextInputType.name,
+                        maxLines: null,// Set to null to allow multiple lines
+
+                        decoration: InputDecoration(
+                          labelText: "Question",
+                          labelStyle: TextStyle(
+
+                            fontSize: 16,
+                          ),
+
+
+                          // prefixIcon: Padding(
+                          //   padding: const EdgeInsets.all(1),
+                          //
+                          // ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        ),
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return "আপনার প্রশ্ন টি লিখুন";
+                          }
+                          return null;
+                        },
+                      ),
+
               ),
+
+
+
 
 
               const SizedBox(height: 50),
@@ -128,7 +149,7 @@ class _askQuestionState extends State<askQuestion> {
                     },
                     child: const Text("Submit"),
                   ),
-
+                  const SizedBox(height: 10,),
                 ],
               ),
             ],

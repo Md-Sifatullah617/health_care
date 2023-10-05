@@ -46,6 +46,14 @@ hive_flutter
 2.12
 file:///Users/radwanabirgmail.com/.pub-cache/hosted/pub.dev/hive_flutter-1.1.0/
 file:///Users/radwanabirgmail.com/.pub-cache/hosted/pub.dev/hive_flutter-1.1.0/lib/
+http
+3.0
+file:///Users/radwanabirgmail.com/.pub-cache/hosted/pub.dev/http-1.1.0/
+file:///Users/radwanabirgmail.com/.pub-cache/hosted/pub.dev/http-1.1.0/lib/
+http_parser
+2.12
+file:///Users/radwanabirgmail.com/.pub-cache/hosted/pub.dev/http_parser-4.0.2/
+file:///Users/radwanabirgmail.com/.pub-cache/hosted/pub.dev/http_parser-4.0.2/lib/
 lints
 3.0
 file:///Users/radwanabirgmail.com/.pub-cache/hosted/pub.dev/lints-2.1.1/
@@ -156,6 +164,6 @@ file:///Users/radwanabirgmail.com/Downloads/flutter/packages/flutter_test/
 file:///Users/radwanabirgmail.com/Downloads/flutter/packages/flutter_test/lib/
 patient_health_care
 3.1
-file:///Volumes/Personal%20Space/Head%20sir%20project/health%20care/
-file:///Volumes/Personal%20Space/Head%20sir%20project/health%20care/lib/
+file:///Volumes/Personal%20Space/Head%20sir%20project/Doctor/health%20care/
+file:///Volumes/Personal%20Space/Head%20sir%20project/Doctor/health%20care/lib/
 2

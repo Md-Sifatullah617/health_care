@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:patient_health_care/home/Home.dart';
 import 'package:patient_health_care/screens/diabetes.dart';
 import 'package:patient_health_care/screens/question_answer/ask_question.dart';
+import 'package:patient_health_care/screens/question_answer/not_answered.dart';
 
 import '../../registration/log_in.dart';
 
@@ -24,19 +25,19 @@ class _drState extends State<all_drower> {
         children: <Widget>[
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color.fromRGBO(32, 63, 140, 1.0),
             ),
             child: Row(
               children: [
                 Icon(
                   Icons.apartment_sharp,
                   size: 30,
-                  color: Colors.blue,
+                  color: Colors.white,
                 ),
                 Text(
                   'হিয়ে',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Colors.white,
                     fontSize: 24,
                   ),
                 ),
@@ -100,7 +101,7 @@ class _drState extends State<all_drower> {
 
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return const askQuestion();
+                      return const notAnswerd();
                     },
                   ));
                 },
