@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:patient_health_care/home/Home.dart';
+import 'package:patient_health_care/registration/forgetPassword/setNewPassword.dart';
+import 'package:patient_health_care/screens/appointment/all%20apointment.dart';
+import 'package:patient_health_care/screens/appointment/new_appointment.dart';
+import 'package:patient_health_care/screens/appointment/painding_appointment.dart';
 import 'package:patient_health_care/screens/diabetes.dart';
 import 'package:patient_health_care/screens/question_answer/answer/answered_question.dart';
 import 'package:patient_health_care/screens/question_answer/ask_question.dart';
@@ -45,6 +49,7 @@ class _drState extends State<all_drower> {
               ],
             ),
           ),
+
 
           ListTile(
             leading: const Icon(Icons.dashboard),
@@ -126,22 +131,28 @@ class _drState extends State<all_drower> {
               ListTile(
                 title: const Text('নতুন অ্যাপয়েন্টমেন্ট'),
                 onTap: () {
-                  // Implement Pending Appoinment
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
+                        return const newappointment();
+                      }));
                 },
               ),
               ListTile(
                 title: const Text('পেন্ডিং এপোয়েনমেন্ট'),
                 onTap: () {
-                  // Implement Pending Appoinment
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
+                        return const paindingAppointment();
+                      }));
                 },
               ),
               ListTile(
                 title: const Text('সকল এপোয়েনমেন্ট'),
                 onTap: () {
-                  // Implement All Appoinment
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
+                        return const allAppointment();
+                      }));
                 },
               ),
             ],

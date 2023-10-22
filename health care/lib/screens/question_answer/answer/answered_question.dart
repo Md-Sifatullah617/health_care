@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient_health_care/home/componects/drawer.dart';
+import 'package:patient_health_care/screens/question_answer/answer/response_list.dart';
 
 
 class answer extends StatefulWidget {
@@ -18,44 +19,48 @@ class _answerState extends State<answer> {
       ),
       drawer: all_drower(),
 
-      body: FutureBuilder(
-        future: getPosts(),
-        builder: (context,snapshot){
-          if(!snapshot.hasData){
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          else{
-            return ListView.builder(
+      body:
+
+             ListView.builder(
               itemCount: 3,
               itemBuilder: (BuildContext context,int index){
                 return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: ListTile(
-                      leading: const SizedBox(
-                        width: 100,
-                        height: 100,
-                      ),
-                      title: const Text("Doctor Name"),
-                      subtitle: Row(
-                        children: const [
-                          Expanded(child: Text("The Question ?")),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text("20/10/2023"),
-                          ),
-                        ],
+                  child: GestureDetector(
+                    onTap: () {
+                      // Navigate to another page when the card is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            // here we will sent the question , response, doctor name date
+                            return responseLi();
+                          },
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: ListTile(
+                        title: const Text("Doctor Name"),
+                        subtitle: Row(
+                          children: const [
+                            Expanded(child: Text("The answered quesion ?")),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text("20/10/2023"),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 );
+
               },
-            );
-          }
-        },
-      ),
+
+            ),
+
+
+
     );
   }
 }
