@@ -67,7 +67,7 @@ class _askQuestionState extends State<askQuestion> {
                 style: Theme.of(context).textTheme.bodyMedium,),
               // question adding
 
-
+              //here user will put their question
               const SizedBox(height: 10,),
 
               ConstrainedBox(
@@ -82,7 +82,6 @@ class _askQuestionState extends State<askQuestion> {
                         decoration: InputDecoration(
                           labelText: "Question",
                           labelStyle: TextStyle(
-
                             fontSize: 16,
                           ),
 

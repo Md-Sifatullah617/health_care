@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:patient_health_care/home/Home.dart';
 import 'package:patient_health_care/screens/diabetes.dart';
+import 'package:patient_health_care/screens/question_answer/answer/answered_question.dart';
 import 'package:patient_health_care/screens/question_answer/ask_question.dart';
 import 'package:patient_health_care/screens/question_answer/not_answered.dart';
 
@@ -110,7 +111,10 @@ class _drState extends State<all_drower> {
                 title: const Text('সকল উত্তর'),
                 onTap: () {
                   // Implement All Question/Answer
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
+                        return const answer();
+                      }));
                 },
               ),
             ],
