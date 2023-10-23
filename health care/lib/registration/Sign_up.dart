@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:patient_health_care/home/Home.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -319,7 +320,7 @@ class _SignupState extends State<Signup> {
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         _boxAccounts.put(
-                          _controllerUsername.text,
+                          _controllerEmail.text,
                           _controllerConFirmPassword.text,
                         );
 
@@ -338,7 +339,14 @@ class _SignupState extends State<Signup> {
 
                         _formKey.currentState?.reset();
 
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return home();
+                            },
+                          ),
+                        );
                       }
                     },
                     child: const Text("Register"),
