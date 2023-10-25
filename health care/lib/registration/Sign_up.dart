@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:patient_health_care/home/Home.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -25,6 +26,7 @@ class _SignupState extends State<Signup> {
   final FocusNode _focusNodePhone = FocusNode();
   final FocusNode _focusNodeAge= FocusNode();
   final FocusNode _focusNodeGender= FocusNode();
+  final FocusNode _focusNodeHeight= FocusNode();
   final FocusNode _focusNodePassword = FocusNode();
   final FocusNode _focusNodeConfirmPassword = FocusNode();
 
@@ -35,6 +37,7 @@ class _SignupState extends State<Signup> {
   final TextEditingController _controllerPhone = TextEditingController();
   final TextEditingController _controllerAge = TextEditingController();
   final TextEditingController _controllerGender = TextEditingController();
+  final TextEditingController _controllerHeight = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
   final TextEditingController _controllerConFirmPassword = TextEditingController();
 
@@ -168,20 +171,49 @@ class _SignupState extends State<Signup> {
 
                   return null;
                 },
-                onEditingComplete: () => _focusNodePassword.requestFocus(),
+                onEditingComplete: () => _focusNodeHeight.requestFocus(),
               ),
 
 
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: _controllerHeight ,
+                focusNode: _focusNodeHeight,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: "Height (cm)",
+                  prefixIcon: const Icon(Icons.height),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please enter your height.";
+                  }
+                  else if(!_phoneNumberRegExp.hasMatch(value)){
+                    return "Use only numbers";
+                  }
+
+                  return null;
+                },
+                onEditingComplete: () => _focusNodeGender.requestFocus(),
+              ),
 
               //dropdown manu
               const SizedBox(height: 10,),
              DropdownButtonFormField(
+               focusNode: _focusNodeGender,
                value: _selectedVal,
                items: _humanCatagory.map((e) => DropdownMenuItem(child: Text(e,),value: e,)
                ).toList(),
                onChanged: (val){
                  setState(() {
                    _selectedVal = val as String;
+
                  });
                },
                icon: const Icon(
@@ -199,6 +231,7 @@ class _SignupState extends State<Signup> {
                    borderRadius: BorderRadius.circular(10),
                  ),
                ),
+
              ),
 
 
@@ -287,7 +320,7 @@ class _SignupState extends State<Signup> {
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         _boxAccounts.put(
-                          _controllerUsername.text,
+                          _controllerEmail.text,
                           _controllerConFirmPassword.text,
                         );
 
@@ -306,7 +339,14 @@ class _SignupState extends State<Signup> {
 
                         _formKey.currentState?.reset();
 
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return home();
+                            },
+                          ),
+                        );
                       }
                     },
                     child: const Text("Register"),

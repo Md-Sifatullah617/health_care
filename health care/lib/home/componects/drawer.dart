@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:patient_health_care/home/Home.dart';
+import 'package:patient_health_care/registration/forgetPassword/setNewPassword.dart';
+import 'package:patient_health_care/screens/appointment/all%20apointment.dart';
+import 'package:patient_health_care/screens/appointment/new_appointment.dart';
+import 'package:patient_health_care/screens/appointment/painding_appointment.dart';
 import 'package:patient_health_care/screens/diabetes.dart';
+import 'package:patient_health_care/screens/question_answer/answer/answered_question.dart';
 import 'package:patient_health_care/screens/question_answer/ask_question.dart';
+import 'package:patient_health_care/screens/question_answer/not_answered.dart';
 
 import '../../registration/log_in.dart';
 
@@ -24,25 +30,26 @@ class _drState extends State<all_drower> {
         children: <Widget>[
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Color.fromRGBO(32, 63, 140, 1.0),
             ),
             child: Row(
               children: [
                 Icon(
                   Icons.apartment_sharp,
                   size: 30,
-                  color: Colors.blue,
+                  color: Colors.white,
                 ),
                 Text(
                   'হিয়ে',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Colors.white,
                     fontSize: 24,
                   ),
                 ),
               ],
             ),
           ),
+
 
           ListTile(
             leading: const Icon(Icons.dashboard),
@@ -100,7 +107,7 @@ class _drState extends State<all_drower> {
 
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return const askQuestion();
+                      return const notAnswerd();
                     },
                   ));
                 },
@@ -109,7 +116,10 @@ class _drState extends State<all_drower> {
                 title: const Text('সকল উত্তর'),
                 onTap: () {
                   // Implement All Question/Answer
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
+                        return const answer();
+                      }));
                 },
               ),
             ],
@@ -121,22 +131,28 @@ class _drState extends State<all_drower> {
               ListTile(
                 title: const Text('নতুন অ্যাপয়েন্টমেন্ট'),
                 onTap: () {
-                  // Implement Pending Appoinment
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
+                        return const newappointment();
+                      }));
                 },
               ),
               ListTile(
                 title: const Text('পেন্ডিং এপোয়েনমেন্ট'),
                 onTap: () {
-                  // Implement Pending Appoinment
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
+                        return const paindingAppointment();
+                      }));
                 },
               ),
               ListTile(
                 title: const Text('সকল এপোয়েনমেন্ট'),
                 onTap: () {
-                  // Implement All Appoinment
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context){
+                        return const allAppointment();
+                      }));
                 },
               ),
             ],

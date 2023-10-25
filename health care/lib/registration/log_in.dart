@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final FocusNode _focusNodePassword = FocusNode();
-  final TextEditingController _controllerUsername = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
   bool _obscurePassword = true;
@@ -53,11 +53,11 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 60),
               TextFormField(
-                controller: _controllerUsername,
-                keyboardType: TextInputType.name,
+                controller: _controllerEmail,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: "Username",
-                  prefixIcon: const Icon(Icons.person_outline),
+                  labelText: "Email",
+                  prefixIcon: const Icon(Icons.email_outlined),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -65,16 +65,15 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onEditingComplete: () => _focusNodePassword.requestFocus(),
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter username.";
-                  } else if (!_boxAccounts.containsKey(value)) {
-                    return "Username is not registered.";
+                    return "Please enter email.";
+                  } else if (!(value.contains('@') && value.contains('.'))) {
+                    return "Invalid email";
                   }
-
                   return null;
                 },
+                onEditingComplete: () => _focusNodePassword.requestFocus(),
               ),
               const SizedBox(height: 10),
               TextFormField(
@@ -105,7 +104,7 @@ class _LoginState extends State<Login> {
                   if (value == null || value.isEmpty) {
                     return "Please enter password.";
                   } else if (value !=
-                      _boxAccounts.get(_controllerUsername.text)) {
+                      _boxAccounts.get(_controllerEmail.text)) {
                     return "Wrong password.";
                   }
 
@@ -125,7 +124,7 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         _boxLogin.put("loginStatus", true);
-                        _boxLogin.put("userName", _controllerUsername.text);
+                        _boxLogin.put("userName", _controllerEmail.text);
 
                         Navigator.pushReplacement(
                           context,
@@ -198,7 +197,7 @@ class _LoginState extends State<Login> {
   @override
   void dispose() {
     _focusNodePassword.dispose();
-    _controllerUsername.dispose();
+    _controllerEmail.dispose();
     _controllerPassword.dispose();
     super.dispose();
   }
