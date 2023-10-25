@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:patient_health_care/home/Home.dart';
 import 'package:patient_health_care/registration/forgetPassword/setNewPassword.dart';
@@ -49,8 +50,6 @@ class _drState extends State<all_drower> {
               ],
             ),
           ),
-
-
           ListTile(
             leading: const Icon(Icons.dashboard),
             title: const Text('ড্যাশবোর্ড'),
@@ -61,14 +60,12 @@ class _drState extends State<all_drower> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return  home();
+                    return home();
                   },
                 ),
               );
-
             },
           ),
-
           ExpansionTile(
             leading: const Icon(Icons.note_alt),
             title: const Text('ডায়াবেটিস'),
@@ -93,7 +90,6 @@ class _drState extends State<all_drower> {
               ListTile(
                 title: const Text('প্রশ্ন করুন'),
                 onTap: () {
-
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return const askQuestion();
@@ -104,7 +100,6 @@ class _drState extends State<all_drower> {
               ListTile(
                 title: const Text('পেইনডিং প্রশ্ন'),
                 onTap: () {
-
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return const notAnswerd();
@@ -117,9 +112,9 @@ class _drState extends State<all_drower> {
                 onTap: () {
                   // Implement All Question/Answer
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context){
-                        return const answer();
-                      }));
+                      MaterialPageRoute(builder: (context) {
+                    return const answer();
+                  }));
                 },
               ),
             ],
@@ -132,27 +127,27 @@ class _drState extends State<all_drower> {
                 title: const Text('নতুন অ্যাপয়েন্টমেন্ট'),
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context){
-                        return const newappointment();
-                      }));
+                      MaterialPageRoute(builder: (context) {
+                    return const newappointment();
+                  }));
                 },
               ),
               ListTile(
                 title: const Text('পেন্ডিং এপোয়েনমেন্ট'),
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context){
-                        return const paindingAppointment();
-                      }));
+                      MaterialPageRoute(builder: (context) {
+                    return const paindingAppointment();
+                  }));
                 },
               ),
               ListTile(
                 title: const Text('সকল এপোয়েনমেন্ট'),
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context){
-                        return const allAppointment();
-                      }));
+                      MaterialPageRoute(builder: (context) {
+                    return const allAppointment();
+                  }));
                 },
               ),
             ],
@@ -161,23 +156,12 @@ class _drState extends State<all_drower> {
             leading: const Icon(Icons.logout),
             title: const Text('লগআউট'),
             onTap: () {
-              // Implement All Appoinment
               _boxLogin.clear();
-              _boxLogin.put("loginStatus", false);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const Login();
-                  },
-                ),
-              );
-
+              Get.offAll(() => const Login());
             },
           ),
         ],
       ),
-
     );
   }
 }

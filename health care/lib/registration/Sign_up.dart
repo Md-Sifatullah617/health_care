@@ -10,27 +10,25 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  _SignupState(){
+  _SignupState() {
     _selectedVal = _humanCatagory[0];
   }
 
-  final _humanCatagory = ["Male","Female","Others"];
+  final _humanCatagory = ["Male", "Female", "Others"];
   String? _selectedVal = "";
 
-  String dropdownvalue='Select';
+  String dropdownvalue = 'Select';
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   final RegExp _phoneNumberRegExp = RegExp(r'^[0-9]+$');
   final FocusNode _username = FocusNode();
   final FocusNode _focusNodeEmail = FocusNode();
   final FocusNode _focusNodePhone = FocusNode();
-  final FocusNode _focusNodeAge= FocusNode();
-  final FocusNode _focusNodeGender= FocusNode();
-  final FocusNode _focusNodeHeight= FocusNode();
+  final FocusNode _focusNodeAge = FocusNode();
+  final FocusNode _focusNodeGender = FocusNode();
+  final FocusNode _focusNodeHeight = FocusNode();
   final FocusNode _focusNodePassword = FocusNode();
   final FocusNode _focusNodeConfirmPassword = FocusNode();
-
-
 
   final TextEditingController _controllerUsername = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
@@ -39,7 +37,8 @@ class _SignupState extends State<Signup> {
   final TextEditingController _controllerGender = TextEditingController();
   final TextEditingController _controllerHeight = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
-  final TextEditingController _controllerConFirmPassword = TextEditingController();
+  final TextEditingController _controllerConFirmPassword =
+      TextEditingController();
 
   final Box _boxAccounts = Hive.box("accounts");
   bool _obscurePassword = true;
@@ -115,8 +114,6 @@ class _SignupState extends State<Signup> {
                 onEditingComplete: () => _focusNodePhone.requestFocus(),
               ),
 
-
-
               const SizedBox(height: 10),
               TextFormField(
                 controller: _controllerPhone,
@@ -135,9 +132,9 @@ class _SignupState extends State<Signup> {
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter phone number.";
-                  } else if (value.length !=11) {
+                  } else if (value.length != 11) {
                     return "Enter 11 digit of your phone number";
-                  }else if(!_phoneNumberRegExp.hasMatch(value)){
+                  } else if (!_phoneNumberRegExp.hasMatch(value)) {
                     return "Use only number between (0-9)";
                   }
 
@@ -145,7 +142,6 @@ class _SignupState extends State<Signup> {
                 },
                 onEditingComplete: () => _focusNodeAge.requestFocus(),
               ),
-
 
               const SizedBox(height: 10),
               TextFormField(
@@ -163,9 +159,12 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
                 validator: (String? value) {
-                  if (value == null || value.isEmpty || value == '0' || value.length==3) {
+                  if (value == null ||
+                      value.isEmpty ||
+                      value == '0' ||
+                      value.length == 3) {
                     return "Please enter your age";
-                  } else if(!_phoneNumberRegExp.hasMatch(value)){
+                  } else if (!_phoneNumberRegExp.hasMatch(value)) {
                     return "Enter your age";
                   }
 
@@ -174,10 +173,9 @@ class _SignupState extends State<Signup> {
                 onEditingComplete: () => _focusNodeHeight.requestFocus(),
               ),
 
-
               const SizedBox(height: 10),
               TextFormField(
-                controller: _controllerHeight ,
+                controller: _controllerHeight,
                 focusNode: _focusNodeHeight,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
@@ -193,8 +191,7 @@ class _SignupState extends State<Signup> {
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter your height.";
-                  }
-                  else if(!_phoneNumberRegExp.hasMatch(value)){
+                  } else if (!_phoneNumberRegExp.hasMatch(value)) {
                     return "Use only numbers";
                   }
 
@@ -204,37 +201,41 @@ class _SignupState extends State<Signup> {
               ),
 
               //dropdown manu
-              const SizedBox(height: 10,),
-             DropdownButtonFormField(
-               focusNode: _focusNodeGender,
-               value: _selectedVal,
-               items: _humanCatagory.map((e) => DropdownMenuItem(child: Text(e,),value: e,)
-               ).toList(),
-               onChanged: (val){
-                 setState(() {
-                   _selectedVal = val as String;
-
-                 });
-               },
-               icon: const Icon(
-                 Icons.arrow_drop_down_circle,
-                 color: Color.fromRGBO(32, 63, 129, 1.0),
-               ),
-               dropdownColor: Color.fromRGBO(212, 223, 253, 1.0),
-               decoration: InputDecoration(
-                 labelText: "Gender",
-                 prefixIcon: Icon(
-                   Icons.person_3_outlined,
-                   color: Color.fromRGBO(32, 63, 129, 1.0),
-                 ),
-                 border: OutlineInputBorder(
-                   borderRadius: BorderRadius.circular(10),
-                 ),
-               ),
-
-             ),
-
-
+              const SizedBox(
+                height: 10,
+              ),
+              DropdownButtonFormField(
+                focusNode: _focusNodeGender,
+                value: _selectedVal,
+                items: _humanCatagory
+                    .map((e) => DropdownMenuItem(
+                          child: Text(
+                            e,
+                          ),
+                          value: e,
+                        ))
+                    .toList(),
+                onChanged: (val) {
+                  setState(() {
+                    _selectedVal = val as String;
+                  });
+                },
+                icon: const Icon(
+                  Icons.arrow_drop_down_circle,
+                  color: Color.fromRGBO(32, 63, 129, 1.0),
+                ),
+                dropdownColor: Color.fromRGBO(212, 223, 253, 1.0),
+                decoration: InputDecoration(
+                  labelText: "Gender",
+                  prefixIcon: Icon(
+                    Icons.person_3_outlined,
+                    color: Color.fromRGBO(32, 63, 129, 1.0),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
 
               const SizedBox(height: 10),
               TextFormField(
@@ -328,7 +329,7 @@ class _SignupState extends State<Signup> {
                           SnackBar(
                             width: 200,
                             backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
+                                Theme.of(context).colorScheme.secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -384,6 +385,4 @@ class _SignupState extends State<Signup> {
     _controllerConFirmPassword.dispose();
     super.dispose();
   }
-
-
 }

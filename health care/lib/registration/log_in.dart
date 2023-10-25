@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:patient_health_care/home/Home.dart';
+import 'package:get/get.dart';
+import 'package:patient_health_care/controller/auth_controller.dart';
 import 'package:patient_health_care/registration/forgetPassword/ForgetPass.dart';
 import 'package:patient_health_care/registration/Sign_up.dart';
-
-
 
 class Login extends StatefulWidget {
   const Login({
@@ -24,15 +21,9 @@ class _LoginState extends State<Login> {
   final TextEditingController _controllerPassword = TextEditingController();
 
   bool _obscurePassword = true;
-  final Box _boxLogin = Hive.box("login");
-  final Box _boxAccounts = Hive.box("accounts");
-
+  final AuthController controller = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
-    if (_boxLogin.get("loginStatus") ?? false) {
-      return home();
-    }
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       body: Form(
@@ -68,9 +59,10 @@ class _LoginState extends State<Login> {
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter email.";
-                  } else if (!(value.contains('@') && value.contains('.'))) {
-                    return "Invalid email";
+                  } else if (!value.isEmail) {
+                    return "Please enter valid email.";
                   }
+
                   return null;
                 },
                 onEditingComplete: () => _focusNodePassword.requestFocus(),
@@ -103,9 +95,8 @@ class _LoginState extends State<Login> {
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter password.";
-                  } else if (value !=
-                      _boxAccounts.get(_controllerEmail.text)) {
-                    return "Wrong password.";
+                  } else if (value.length < 6) {
+                    return "Password must be at least 6 characters.";
                   }
 
                   return null;
@@ -114,37 +105,30 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 60),
               Column(
                 children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        _boxLogin.put("loginStatus", true);
-                        _boxLogin.put("userName", _controllerEmail.text);
-
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return home();
+                  Obx(
+                    () => controller.isLoading.value
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size.fromHeight(50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                controller.login(
+                                  _controllerEmail.text,
+                                  _controllerPassword.text,
+                                );
+                              }
                             },
+                            child: const Text("Login"),
                           ),
-                        );
-                      }
-                    },
-                    child: const Text("Login"),
                   ),
-
                   Row(
-
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
-
                       TextButton(
                         onPressed: () {
                           _formKey.currentState?.reset();
@@ -162,7 +146,6 @@ class _LoginState extends State<Login> {
                       ),
                     ],
                   ),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -184,7 +167,6 @@ class _LoginState extends State<Login> {
                       ),
                     ],
                   ),
-
                 ],
               ),
             ],

@@ -1,29 +1,20 @@
 import 'package:flutter/material.dart';
-
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:patient_health_care/home/componects/drawer.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-
-
 
 class home extends StatelessWidget {
   home({super.key});
 
   final Box _boxLogin = Hive.box("login");
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("ড্যাশবোর্ড"),
-
       ),
-      drawer:  all_drower(),
-
-
+      drawer: all_drower(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -164,33 +155,33 @@ class _LineChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LineChart(
-      // swapAnimationDuration: const Duration(milliseconds: 250),
+        // swapAnimationDuration: const Duration(milliseconds: 250),
         simpleData1);
   }
 }
 
 LineChartData get simpleData1 => LineChartData(
-  gridData: gridData,
-  titlesData: titlesData,
-  borderData: borderData,
-  lineBarsData: lineBarsData,
-  minX: 0,
-  maxX: 15,
-  minY: 0,
-  maxY: 5,
-);
+      gridData: gridData,
+      titlesData: titlesData,
+      borderData: borderData,
+      lineBarsData: lineBarsData,
+      minX: 0,
+      maxX: 15,
+      minY: 0,
+      maxY: 5,
+    );
 
 List<LineChartBarData> get lineBarsData =>
     [lineChartBarData1, lineChartBarData2];
 
 FlTitlesData get titlesData => FlTitlesData(
-  bottomTitles: AxisTitles(
-    sideTitles: bottomTitles,
-  ),
-  rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-  topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-  leftTitles: AxisTitles(sideTitles: leftTitles()),
-);
+      bottomTitles: AxisTitles(
+        sideTitles: bottomTitles,
+      ),
+      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      leftTitles: AxisTitles(sideTitles: leftTitles()),
+    );
 
 Widget leftTitlesWidget(double value, TitleMeta meta) {
   const style = TextStyle(
@@ -226,11 +217,11 @@ Widget leftTitlesWidget(double value, TitleMeta meta) {
 }
 
 SideTitles leftTitles() => const SideTitles(
-  getTitlesWidget: leftTitlesWidget,
-  showTitles: true,
-  interval: 1,
-  reservedSize: 40,
-);
+      getTitlesWidget: leftTitlesWidget,
+      showTitles: true,
+      interval: 1,
+      reservedSize: 40,
+    );
 
 Widget bottomTitlesWidget(double value, TitleMeta meta) {
   const style = TextStyle(
@@ -277,63 +268,62 @@ Widget bottomTitlesWidget(double value, TitleMeta meta) {
 }
 
 SideTitles get bottomTitles => const SideTitles(
-  getTitlesWidget: bottomTitlesWidget,
-  showTitles: true,
-  interval: 1,
-  reservedSize: 32,
-);
+      getTitlesWidget: bottomTitlesWidget,
+      showTitles: true,
+      interval: 1,
+      reservedSize: 32,
+    );
 
 FlGridData get gridData => const FlGridData(show: true);
 
 FlBorderData get borderData => FlBorderData(
-  show: true,
-  border: const Border(
-    bottom: BorderSide(color: Colors.grey, width: 4),
-    left: BorderSide(
-      color: Colors.grey,
-    ),
-    right: BorderSide(
-      color: Colors.transparent,
-    ),
-    top: BorderSide(
-      color: Colors.transparent,
-    ),
-  ),
-);
+      show: true,
+      border: const Border(
+        bottom: BorderSide(color: Colors.grey, width: 4),
+        left: BorderSide(
+          color: Colors.grey,
+        ),
+        right: BorderSide(
+          color: Colors.transparent,
+        ),
+        top: BorderSide(
+          color: Colors.transparent,
+        ),
+      ),
+    );
 
 LineChartBarData get lineChartBarData1 => LineChartBarData(
-  isCurved: true,
-  color: Colors.blue,
-  barWidth: 6,
-  isStrokeCapRound: true,
-  dotData: const FlDotData(show: false),
-  belowBarData: BarAreaData(show: false),
-  spots: const [
-    FlSpot(0, 1),
-    FlSpot(3, 1.5),
-    FlSpot(5, 1),
-    FlSpot(7, 1.6),
-    FlSpot(10, 2),
-    FlSpot(12, 3),
-    FlSpot(15, 4),
-
-  ],
-);
+      isCurved: true,
+      color: Colors.blue,
+      barWidth: 6,
+      isStrokeCapRound: true,
+      dotData: const FlDotData(show: false),
+      belowBarData: BarAreaData(show: false),
+      spots: const [
+        FlSpot(0, 1),
+        FlSpot(3, 1.5),
+        FlSpot(5, 1),
+        FlSpot(7, 1.6),
+        FlSpot(10, 2),
+        FlSpot(12, 3),
+        FlSpot(15, 4),
+      ],
+    );
 
 LineChartBarData get lineChartBarData2 => LineChartBarData(
-  isCurved: true,
-  color: Colors.green,
-  barWidth: 6,
-  isStrokeCapRound: true,
-  dotData: const FlDotData(show: false),
-  belowBarData: BarAreaData(show: false),
-  spots: const [
-    FlSpot(0, 2),
-    FlSpot(3, 2.5),
-    FlSpot(5, 3),
-    FlSpot(7, 1.6),
-    FlSpot(8, 2),
-    FlSpot(10, 3),
-    FlSpot(15, 1),
-  ],
-);
+      isCurved: true,
+      color: Colors.green,
+      barWidth: 6,
+      isStrokeCapRound: true,
+      dotData: const FlDotData(show: false),
+      belowBarData: BarAreaData(show: false),
+      spots: const [
+        FlSpot(0, 2),
+        FlSpot(3, 2.5),
+        FlSpot(5, 3),
+        FlSpot(7, 1.6),
+        FlSpot(8, 2),
+        FlSpot(10, 3),
+        FlSpot(15, 1),
+      ],
+    );
