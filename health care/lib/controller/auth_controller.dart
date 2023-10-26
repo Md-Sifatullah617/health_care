@@ -10,6 +10,7 @@ class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   String baseUrl = 'https://hiyehealth.com/api';
   final Box _boxLogin = Hive.box('login');
+  final Box _boxRegister = Hive.box('accounts');
   Future<void> login(String email, String password) async {
     isLoading.value = true;
     try {
@@ -25,6 +26,40 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         _boxLogin.put('token', loginModel.data!.token!.split('|')[1]);
         _boxLogin.put('name', loginModel.data!.name);
+        customToast(msg: loginModel.message!);
+        Get.offAll(() => home());
+        isLoading.value = false;
+      } else {
+        customToast(msg: loginModel.message!, isError: true);
+        isLoading.value = false;
+      }
+    } catch (e) {
+      print('error: $e');
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> signUpUser(String name, String email, String password,
+      String phone, String age, String gender) async {
+    isLoading.value = true;
+    try {
+      var response = await http.post(
+        Uri.parse('$baseUrl/register'),
+        body: {
+          'name': name,
+          'email': email,
+          'password': password,
+          'phone': phone,
+          'age': age,
+          'gender': gender,
+        },
+      );
+      final RpLoginModel loginModel =
+          RpLoginModel.fromJson(jsonDecode(response.body));
+      if (response.statusCode == 200) {
+        _boxRegister.put('token', loginModel.data!.token!.split('|')[1]);
+        _boxRegister.put('name', loginModel.data!.name);
+        _boxRegister.put(email, password);
         customToast(msg: loginModel.message!);
         Get.offAll(() => home());
         isLoading.value = false;

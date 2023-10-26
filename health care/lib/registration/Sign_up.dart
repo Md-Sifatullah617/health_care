@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:patient_health_care/controller/auth_controller.dart';
 import 'package:patient_health_care/home/Home.dart';
 
 class Signup extends StatefulWidget {
@@ -42,6 +44,7 @@ class _SignupState extends State<Signup> {
 
   final Box _boxAccounts = Hive.box("accounts");
   bool _obscurePassword = true;
+  final AuthController _authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -106,8 +109,8 @@ class _SignupState extends State<Signup> {
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter email.";
-                  } else if (!(value.contains('@') && value.contains('.'))) {
-                    return "Invalid email";
+                  } else if (!value.isEmail) {
+                    return "Please enter valid email.";
                   }
                   return null;
                 },
@@ -217,7 +220,7 @@ class _SignupState extends State<Signup> {
                     .toList(),
                 onChanged: (val) {
                   setState(() {
-                    _selectedVal = val as String;
+                    _selectedVal = val;
                   });
                 },
                 icon: const Icon(
@@ -311,46 +314,48 @@ class _SignupState extends State<Signup> {
               const SizedBox(height: 50),
               Column(
                 children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        _boxAccounts.put(
-                          _controllerEmail.text,
-                          _controllerConFirmPassword.text,
-                        );
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            width: 200,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                  Obx(
+                    () => _authController.isLoading.value
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size.fromHeight(50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
                             ),
-                            behavior: SnackBarBehavior.floating,
-                            content: const Text("Registered Successfully"),
-                          ),
-                        );
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                // _boxAccounts.put(
+                                //   _controllerEmail.text,
+                                //   _controllerConFirmPassword.text,
+                                // );
 
-                        _formKey.currentState?.reset();
+                                // ScaffoldMessenger.of(context).showSnackBar(
+                                //   SnackBar(
+                                //     width: 200,
+                                //     backgroundColor:
+                                //         Theme.of(context).colorScheme.secondary,
+                                //     shape: RoundedRectangleBorder(
+                                //       borderRadius: BorderRadius.circular(10),
+                                //     ),
+                                //     behavior: SnackBarBehavior.floating,
+                                //     content: const Text("Registered Successfully"),
+                                //   ),
+                                // );
+                                _authController.signUpUser(
+                                    _controllerUsername.text,
+                                    _controllerEmail.text,
+                                    _controllerPassword.text,
+                                    _controllerPhone.text,
+                                    _controllerAge.text,
+                                    _selectedVal.toString());
 
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return home();
+                                _formKey.currentState?.reset();
+                              }
                             },
+                            child: const Text("Register"),
                           ),
-                        );
-                      }
-                    },
-                    child: const Text("Register"),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
