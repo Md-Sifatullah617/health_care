@@ -5,14 +5,14 @@ import 'package:hive/hive.dart';
 import 'package:patient_health_care/home/Home.dart';
 import 'package:patient_health_care/registration/log_in.dart';
 
-class splash extends StatefulWidget {
-  const splash({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splash> createState() => _splashState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashState extends State<splash> {
+class _SplashScreenState extends State<SplashScreen> {
   final Box _boxLogin = Hive.box("login");
 
   @override
@@ -21,7 +21,7 @@ class _splashState extends State<splash> {
 
     Timer(const Duration(seconds: 4), () {
       if (_boxLogin.get('token') != null) {
-        Get.offAll(() => home());
+        Get.offAll(() => const Homepage());
       } else {
         Get.offAll(() => const Login());
       }

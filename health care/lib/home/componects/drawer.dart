@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:patient_health_care/home/Home.dart';
-import 'package:patient_health_care/registration/forgetPassword/setNewPassword.dart';
-import 'package:patient_health_care/screens/appointment/all%20apointment.dart';
+import 'package:patient_health_care/registration/log_in.dart';
+import 'package:patient_health_care/screens/appointment/all_apointment.dart';
 import 'package:patient_health_care/screens/appointment/new_appointment.dart';
 import 'package:patient_health_care/screens/appointment/painding_appointment.dart';
 import 'package:patient_health_care/screens/diabetes.dart';
@@ -11,17 +11,16 @@ import 'package:patient_health_care/screens/question_answer/answer/answered_ques
 import 'package:patient_health_care/screens/question_answer/ask_question.dart';
 import 'package:patient_health_care/screens/question_answer/not_answered.dart';
 
-import '../../registration/log_in.dart';
-
-class all_drower extends StatefulWidget {
-  all_drower({super.key});
+class AllDrawer extends StatefulWidget {
+  const AllDrawer({super.key});
 
   @override
-  State<all_drower> createState() => _drState();
+  State<AllDrawer> createState() => _DraderState();
 }
 
-class _drState extends State<all_drower> {
+class _DraderState extends State<AllDrawer> {
   final Box _boxLogin = Hive.box("login");
+  final Box _boxAccount = Hive.box("accounts");
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +59,7 @@ class _drState extends State<all_drower> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return home();
+                    return const Homepage();
                   },
                 ),
               );
@@ -92,7 +91,7 @@ class _drState extends State<all_drower> {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return const askQuestion();
+                      return const AskQuestion();
                     },
                   ));
                 },
@@ -102,7 +101,7 @@ class _drState extends State<all_drower> {
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return const notAnswerd();
+                      return const NotAnswerd();
                     },
                   ));
                 },
@@ -113,7 +112,7 @@ class _drState extends State<all_drower> {
                   // Implement All Question/Answer
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
-                    return const answer();
+                    return const AnsWer();
                   }));
                 },
               ),
@@ -128,7 +127,7 @@ class _drState extends State<all_drower> {
                 onTap: () {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
-                    return const newappointment();
+                    return const NewAppointment();
                   }));
                 },
               ),
@@ -137,7 +136,7 @@ class _drState extends State<all_drower> {
                 onTap: () {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
-                    return const paindingAppointment();
+                    return const PaindingAppointment();
                   }));
                 },
               ),
@@ -146,7 +145,7 @@ class _drState extends State<all_drower> {
                 onTap: () {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
-                    return const allAppointment();
+                    return const AllAppointment();
                   }));
                 },
               ),
@@ -157,6 +156,7 @@ class _drState extends State<all_drower> {
             title: const Text('লগআউট'),
             onTap: () {
               _boxLogin.clear();
+              _boxAccount.clear();
               Get.offAll(() => const Login());
             },
           ),

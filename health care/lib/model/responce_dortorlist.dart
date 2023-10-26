@@ -10,6 +10,10 @@ RpDoctorListmodel rpDoctorListmodelFromJson(String str) =>
 String rpDoctorListmodelToJson(RpDoctorListmodel data) =>
     json.encode(data.toJson());
 
+List<RpDoctorListmodel> rpDoctorListmodelFromJsonList(String str) =>
+    List<RpDoctorListmodel>.from(
+        json.decode(str).map((x) => RpDoctorListmodel.fromJson(x)));
+
 class RpDoctorListmodel {
   final int? id;
   final String? position;

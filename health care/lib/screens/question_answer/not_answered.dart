@@ -1,48 +1,84 @@
 import "package:flutter/material.dart";
+import "package:get/get.dart";
+import "package:patient_health_care/controller/doctor_controller.dart";
+import "package:skeletons/skeletons.dart";
 
-
-class notAnswerd extends StatefulWidget {
-  const notAnswerd({super.key});
+class NotAnswerd extends StatefulWidget {
+  const NotAnswerd({super.key});
 
   @override
-  State<notAnswerd> createState() => _notAnswerdState();
+  State<NotAnswerd> createState() => _NotAnswerdState();
 }
 
-class _notAnswerdState extends State<notAnswerd> {
+class _NotAnswerdState extends State<NotAnswerd> {
+  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
+
+  Future<void> loadData() async {
+    Get.put(DoctorController());
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Get.find<DoctorController>().getAllQuestion();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("উত্তর পাওয়া যাইনি",),
+        title: const Text(
+          "উত্তর পাওয়া যাইনি",
+        ),
       ),
-      body: ListView.builder(
-        itemCount: 3,
-        itemBuilder: (BuildContext context,int index){
-          return Card(
-            child: GestureDetector(
-
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: ListTile(
-                  title: const Text("Doctor Name"),
-                  subtitle: Row(
-                    children: const [
-                      Expanded(child: Text("The painding question ?")),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text("20/10/2023"),
+      body: GetBuilder<DoctorController>(
+        builder: (controller) => controller.isLoading
+            ? SkeletonListView(
+                itemCount: 5,
+                itemBuilder: (p0, p1) {
+                  return SkeletonListTile(
+                    hasLeading: false,
+                    hasSubtitle: true,
+                  );
+                },
+              )
+            : ListView.builder(
+                itemCount: controller.allQuestion.length,
+                itemBuilder: (BuildContext context, int index) {
+                  String doctorName = controller.doctorList
+                      .firstWhere((element) =>
+                          element.userId ==
+                          controller.allQuestion[index].doctorId)
+                      .docName!;
+                  return Card(
+                    child: GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: ListTile(
+                          title: Text(doctorName),
+                          subtitle: Row(
+                            children: [
+                              Expanded(
+                                  child: Text(
+                                      controller.allQuestion[index].question ??
+                                          "")),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(controller
+                                    .allQuestion[index].createdAt
+                                    .toString()
+                                    .split(" ")[0]),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
-            ),
-          );
-
-        },
-
       ),
     );
-
   }
 }

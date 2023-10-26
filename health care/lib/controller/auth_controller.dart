@@ -27,7 +27,7 @@ class AuthController extends GetxController {
         _boxLogin.put('token', loginModel.data!.token!.split('|')[1]);
         _boxLogin.put('name', loginModel.data!.name);
         customToast(msg: loginModel.message!);
-        Get.offAll(() => home());
+        Get.offAll(() => const Homepage());
         isLoading.value = false;
       } else {
         customToast(msg: loginModel.message!, isError: true);
@@ -61,7 +61,7 @@ class AuthController extends GetxController {
         _boxRegister.put('name', loginModel.data!.name);
         _boxRegister.put(email, password);
         customToast(msg: loginModel.message!);
-        Get.offAll(() => home());
+        Get.offAll(() => const Homepage());
         isLoading.value = false;
       } else {
         customToast(msg: loginModel.message!, isError: true);

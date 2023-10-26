@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:patient_health_care/home/componects/drawer.dart';
+import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:patient_health_care/controller/doctor_controller.dart';
+import 'package:patient_health_care/home/componects/drawer.dart';
 
-class home extends StatelessWidget {
-  home({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
 
-  final Box _boxLogin = Hive.box("login");
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  @override
+  void initState() {
+    loadData();
+    super.initState();
+  }
+
+  Future<void> loadData() async {
+    Get.put(DoctorController());
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Get.find<DoctorController>().fetchDoctorList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +31,7 @@ class home extends StatelessWidget {
       appBar: AppBar(
         title: const Text("ড্যাশবোর্ড"),
       ),
-      drawer: all_drower(),
+      drawer: const AllDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
