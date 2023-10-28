@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:patient_health_care/home/Home.dart';
+import 'package:patient_health_care/view/home/Home.dart';
 import 'package:patient_health_care/model/response_login.dart';
 import 'package:patient_health_care/utils/custom_toast.dart';
 

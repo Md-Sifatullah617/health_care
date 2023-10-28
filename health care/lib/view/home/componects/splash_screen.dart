@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:patient_health_care/home/Home.dart';
-import 'package:patient_health_care/registration/log_in.dart';
+import 'package:patient_health_care/view/home/Home.dart';
+import 'package:patient_health_care/view/registration/log_in.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

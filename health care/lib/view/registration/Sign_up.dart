@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:patient_health_care/controller/auth_controller.dart';
-import 'package:patient_health_care/home/Home.dart';
+import 'package:patient_health_care/view/home/Home.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});

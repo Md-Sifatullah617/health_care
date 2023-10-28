@@ -47,10 +47,11 @@ class _NotAnswerdState extends State<NotAnswerd> {
                 itemCount: controller.allQuestion.length,
                 itemBuilder: (BuildContext context, int index) {
                   String doctorName = controller.doctorList
-                      .firstWhere((element) =>
-                          element.userId ==
-                          controller.allQuestion[index].doctorId)
-                      .docName!;
+                          .firstWhereOrNull((element) =>
+                              element.id.toString() ==
+                              controller.allQuestion[index].doctorId)
+                          ?.docName ??
+                      "error";
                   return Card(
                     child: GestureDetector(
                       child: Padding(

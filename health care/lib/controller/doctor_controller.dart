@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:patient_health_care/home/Home.dart';
+import 'package:patient_health_care/view/home/Home.dart';
 import 'package:patient_health_care/model/responce_dortorlist.dart';
 import 'package:patient_health_care/model/response_allquestion.dart';
 import 'package:patient_health_care/model/rp_pending_appointment.dart';
@@ -103,14 +103,13 @@ class DoctorController extends GetxController {
   Future<void> fetchPendingAppointment() async {
     isLoading = true;
     update();
-    var response =
-        await http.get(Uri.parse('$baseUrl/pending_appointment'), headers: {
+    var response = await http
+        .get(Uri.parse('$baseUrl/all/pending/appointments'), headers: {
       'Authorization': 'Bearer $token',
     });
     if (response.statusCode == 200) {
       var data = rpgetPendingAppointmentFromJson(response.body);
       if (data.data != null && data.data!.isNotEmpty) {
-        // Check if data.data is not empty
         pendingAppointment.clear();
         pendingAppointment.addAll(data.data!);
         print(pendingAppointment.length);

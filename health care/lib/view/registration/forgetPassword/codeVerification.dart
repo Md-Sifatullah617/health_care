@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:patient_health_care/registration/forgetPassword/setNewPassword.dart';
+import 'package:patient_health_care/view/registration/forgetPassword/setNewPassword.dart';
 
 class veryfy extends StatefulWidget {
   const veryfy({super.key});
@@ -23,9 +23,10 @@ class _veryfyState extends State<veryfy> {
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
-              const SizedBox(height: 200,),
+              const SizedBox(
+                height: 200,
+              ),
               TextFormField(
-
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   labelText: "Verification Code",
@@ -38,37 +39,35 @@ class _veryfyState extends State<veryfy> {
                   ),
                 ),
                 validator: (String? value) {
-                  if (value == null || value.isEmpty ) {
+                  if (value == null || value.isEmpty) {
                     return "Please enter verification code";
-                  } else if(!_NumberRegExp.hasMatch(value)){
+                  } else if (!_NumberRegExp.hasMatch(value)) {
                     return "Wrong code";
                   }
 
                   return null;
                 },
-
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),
-
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
-
-
                     _formKey.currentState?.reset();
 
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context){
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
                       return set_new_password();
                     }));
                   }
                 },
-
                 child: const Text("Verify"),
               ),
             ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:patient_health_care/home/componects/drawer.dart';
+import 'package:patient_health_care/view/home/componects/drawer.dart';
 
 class AllAppointment extends StatefulWidget {
   const AllAppointment({super.key});
@@ -18,14 +18,17 @@ class _AllAppointmentState extends State<AllAppointment> {
       drawer: const AllDrawer(),
       body: ListView.builder(
         itemCount: 10,
-        itemBuilder: (BuildContext context,int index){
+        itemBuilder: (BuildContext context, int index) {
           return const Card(
             child: Padding(
               padding: EdgeInsets.all(12.0),
               child: ListTile(
-                title: Text("Doctor Name",style: TextStyle(
-                  color: Colors.orange,
-                ),),
+                title: Text(
+                  "Doctor Name",
+                  style: TextStyle(
+                    color: Colors.orange,
+                  ),
+                ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -34,10 +37,12 @@ class _AllAppointmentState extends State<AllAppointment> {
                       children: [
                         Icon(Icons.email),
                         SizedBox(width: 8),
-                        Text("doctor@example.com",
+                        Text(
+                          "doctor@example.com",
                           style: TextStyle(
                             color: Colors.blueAccent,
-                          ),),
+                          ),
+                        ),
                       ],
                     ),
                     Row(
@@ -52,9 +57,7 @@ class _AllAppointmentState extends State<AllAppointment> {
               ),
             ),
           );
-
         },
-
       ),
     );
   }

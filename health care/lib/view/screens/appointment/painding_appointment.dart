@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_health_care/controller/doctor_controller.dart';
-import 'package:patient_health_care/home/componects/drawer.dart';
+import 'package:patient_health_care/view/home/componects/drawer.dart';
 
 class PaindingAppointment extends StatefulWidget {
   const PaindingAppointment({super.key});
@@ -40,30 +40,31 @@ class _PaindingAppointmentState extends State<PaindingAppointment> {
                 itemCount: controller.pendingAppointment.length,
                 itemBuilder: (BuildContext context, int index) {
                   String doctorName = controller.doctorList
-                      .firstWhere((element) =>
-                          element.userId ==
-                          controller.pendingAppointment[index].docId)
-                      .docName!;
+                          .firstWhereOrNull((element) =>
+                              element.id.toString() ==
+                              controller.pendingAppointment[index].docId)
+                          ?.docName ??
+                      "error";
                   return Card(
                     child: Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: ListTile(
                         title: Text(
                           doctorName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.orange,
                           ),
                         ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("The reason for the appointment."),
+                            Text(controller.pendingAppointment[index].reason!),
                             Row(
                               children: [
                                 Icon(Icons.email),
                                 SizedBox(width: 8),
                                 Text(
-                                  "doctor@example.com",
+                                  controller.pendingAppointment[index].email!,
                                   style: TextStyle(
                                     color: Colors.blueAccent,
                                   ),
@@ -74,7 +75,8 @@ class _PaindingAppointmentState extends State<PaindingAppointment> {
                               children: [
                                 Icon(Icons.access_time),
                                 SizedBox(width: 8),
-                                Text("20/10/2023 10:00 AM"),
+                                Text(
+                                    '${controller.pendingAppointment[index].appointmentDate.toString().split(" ")[0]}    ${controller.pendingAppointment[index].appointmentTime}'),
                               ],
                             ),
                           ],

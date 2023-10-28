@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:patient_health_care/controller/doctor_controller.dart';
-import 'package:patient_health_care/home/componects/drawer.dart';
+import 'package:patient_health_care/view/home/componects/drawer.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});

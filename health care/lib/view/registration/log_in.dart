@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_health_care/controller/auth_controller.dart';
-import 'package:patient_health_care/registration/forgetPassword/ForgetPass.dart';
-import 'package:patient_health_care/registration/Sign_up.dart';
+import 'package:patient_health_care/view/registration/forgetPassword/ForgetPass.dart';
+import 'package:patient_health_care/view/registration/Sign_up.dart';
 
 class Login extends StatefulWidget {
   const Login({

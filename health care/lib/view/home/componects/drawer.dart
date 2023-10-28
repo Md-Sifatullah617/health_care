@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:patient_health_care/home/Home.dart';
-import 'package:patient_health_care/registration/log_in.dart';
-import 'package:patient_health_care/screens/appointment/all_apointment.dart';
-import 'package:patient_health_care/screens/appointment/new_appointment.dart';
-import 'package:patient_health_care/screens/appointment/painding_appointment.dart';
-import 'package:patient_health_care/screens/diabetes.dart';
-import 'package:patient_health_care/screens/question_answer/answer/answered_question.dart';
-import 'package:patient_health_care/screens/question_answer/ask_question.dart';
-import 'package:patient_health_care/screens/question_answer/not_answered.dart';
+import 'package:patient_health_care/view/home/Home.dart';
+import 'package:patient_health_care/view/registration/log_in.dart';
+import 'package:patient_health_care/view/screens/appointment/all_apointment.dart';
+import 'package:patient_health_care/view/screens/appointment/new_appointment.dart';
+import 'package:patient_health_care/view/screens/appointment/painding_appointment.dart';
+import 'package:patient_health_care/view/screens/diabetes.dart';
+import 'package:patient_health_care/view/screens/question_answer/answer/answered_question.dart';
+import 'package:patient_health_care/view/screens/question_answer/ask_question.dart';
+import 'package:patient_health_care/view/screens/question_answer/not_answered.dart';
 
 class AllDrawer extends StatefulWidget {
   const AllDrawer({super.key});

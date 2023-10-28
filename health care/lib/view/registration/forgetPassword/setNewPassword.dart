@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:patient_health_care/registration/log_in.dart';
+import 'package:patient_health_care/view/registration/log_in.dart';
 
 class set_new_password extends StatefulWidget {
   const set_new_password({super.key});
 
   @override
   State<set_new_password> createState() => _set_new_passwordState();
-
 }
 
 class _set_new_passwordState extends State<set_new_password> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
-
   final TextEditingController _controllerPassword = TextEditingController();
-  final TextEditingController _controllerConFirmPassword = TextEditingController();
-
+  final TextEditingController _controllerConFirmPassword =
+      TextEditingController();
 
   bool _obscurePassword = true;
-  String password="";
-  String confirmPass="";
-
+  String password = "";
+  String confirmPass = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Set New Password"
-        ),
+        title: Text("Set New Password"),
       ),
       body: Form(
         key: _formKey,
@@ -37,13 +32,14 @@ class _set_new_passwordState extends State<set_new_password> {
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
-              const SizedBox(height: 100,),
+              const SizedBox(
+                height: 100,
+              ),
               Text("আপনার নতুন পাসওয়ার্ডটি দিন"),
               const SizedBox(height: 10),
               TextFormField(
                 controller: _controllerPassword,
                 obscureText: _obscurePassword,
-
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   labelText: "New password",
@@ -72,13 +68,11 @@ class _set_new_passwordState extends State<set_new_password> {
                   }
                   return null;
                 },
-
               ),
               const SizedBox(height: 10),
               TextFormField(
                 controller: _controllerConFirmPassword,
                 obscureText: _obscurePassword,
-
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                   labelText: "Confirm new password",
@@ -106,11 +100,9 @@ class _set_new_passwordState extends State<set_new_password> {
                     return "Password doesn't match.";
                   }
 
-                  return confirmPass=value;
+                  return confirmPass = value;
                 },
               ),
-
-
               const SizedBox(height: 50),
               Column(
                 children: [
@@ -124,69 +116,62 @@ class _set_new_passwordState extends State<set_new_password> {
                     onPressed: () {
                       // i did not added the new password in the Hive.
 
-
-
-                        //_formKey.currentState?.reset();
-                        if(password==confirmPass){
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              width: 200,
-                              backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              behavior: SnackBarBehavior.floating,
-                              content: const Text("Registered Successfully"),
+                      //_formKey.currentState?.reset();
+                      if (password == confirmPass) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            width: 200,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          );
+                            behavior: SnackBarBehavior.floating,
+                            content: const Text("Registered Successfully"),
+                          ),
+                        );
 
-
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const Login();
-                              },
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const Login();
+                            },
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            width: 200,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          );
-                        }else{
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              width: 200,
-                              backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              behavior: SnackBarBehavior.floating,
-                              content: const Text("Password and Confirm Password did not mathch"),
-                            ),
-                          );
+                            behavior: SnackBarBehavior.floating,
+                            content: const Text(
+                                "Password and Confirm Password did not mathch"),
+                          ),
+                        );
 
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const set_new_password();
-                              },
-                            ),
-                          );
-                        }
-
-                      },
-
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const set_new_password();
+                            },
+                          ),
+                        );
+                      }
+                    },
                     child: const Text("Set password"),
                   ),
-
                 ],
               ),
             ],
-            
           ),
         ),
       ),
     );
   }
-
 }
