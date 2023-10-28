@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient_health_care/view/home/componects/drawer.dart';
-import 'package:patient_health_care/screens/question_AnsWer/AnsWer/response_list.dart';
+import 'package:patient_health_care/view/screens/question_answer/answer/response_list.dart';
 
 class AnsWer extends StatefulWidget {
   const AnsWer({super.key});
@@ -28,7 +28,7 @@ class _AnsWerState extends State<AnsWer> {
                   MaterialPageRoute(
                     builder: (context) {
                       // here we will sent the question , response, doctor name date
-                      return const responseLi();
+                      return const ResponseLi();
                     },
                   ),
                 );
